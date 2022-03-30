@@ -2,13 +2,13 @@ import time
 
 
 def fast_pow(x, n):
-    res = 1
+    r = 1
     while n > 0:
         if n - 2 * (n >> 1) == 1:
-            res *= x
+            r *= x
         x *= x
         n = n >> 1
-    return res
+    return r
 
 
 def main():
@@ -18,16 +18,19 @@ def main():
     while x < 0:
         x = int(input("Произошла ошибка! Попробуйте еще раз: "))
 
-    n = int(input("Введите показатель степени: "))
-    while n < 0:
-        n = int(input("Произошла ошибка! Попробуйте еще раз: "))
+    n = 0
+    results = []
+    while n != 50000:
+        start_time = time.monotonic()
+        fast_pow(x, n)
+        elapsed_time = time.monotonic() - start_time
 
-    start_time = time.monotonic()
-    fast_pow(x, n)
-    elapsed_time = time.monotonic() - start_time
+        # print(f"{x}^{n} = {fast_pow(x, n)}")
 
-    print(f"x^n = {fast_pow(x, n)}")
-    print(f"Время выполнения: {elapsed_time}")
+        results.append(elapsed_time)
+        n += 100
+
+    print(f"Время выполнения: {results}")
 
 
 main()
