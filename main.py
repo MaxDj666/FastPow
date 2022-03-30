@@ -2,13 +2,13 @@ import time
 
 
 def fast_pow(x, n):
-    if n == 0:
-        return 1
-
-    if n - 2 * (n >> 1) == 0:
-        return fast_pow(x, n >> 1) * fast_pow(x, n >> 1)
-
-    return fast_pow(x, n - 1) * x
+    res = 1
+    while n > 0:
+        if n - 2 * (n >> 1) == 1:
+            res *= x
+        x *= x
+        n = n >> 1
+    return res
 
 
 def main():
@@ -23,9 +23,10 @@ def main():
         n = int(input("Произошла ошибка! Попробуйте еще раз: "))
 
     start_time = time.monotonic()
-    print(f"x^n = {fast_pow(x, n)}")
+    fast_pow(x, n)
     elapsed_time = time.monotonic() - start_time
 
+    print(f"x^n = {fast_pow(x, n)}")
     print(f"Время выполнения: {elapsed_time}")
 
 
