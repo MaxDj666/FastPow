@@ -20,15 +20,25 @@ def main():
 
     n = 0
     results = []
-    while n != 50000:
-        start_time = time.monotonic()
+    while n <= 50000:
+        start_time1 = time.monotonic()
         fast_pow(x, n)
-        elapsed_time = time.monotonic() - start_time
+        elapsed_time1 = time.monotonic() - start_time1
+
+        start_time2 = time.monotonic()
+        fast_pow(x, n)
+        elapsed_time2 = time.monotonic() - start_time2
+
+        start_time3 = time.monotonic()
+        fast_pow(x, n)
+        elapsed_time3 = time.monotonic() - start_time3
+
+        elapsed_time = (elapsed_time1 + elapsed_time2 + elapsed_time3) / 3
 
         # print(f"{x}^{n} = {fast_pow(x, n)}")
 
         results.append(elapsed_time)
-        n += 100
+        n += 1000
 
     print(f"Время выполнения: {results}")
 
